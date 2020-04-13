@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { useState } from 'react'
 import GoalContent from './components/GoalContent'
 import Controls from './components/Controls';

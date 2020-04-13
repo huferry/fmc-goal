@@ -1,32 +1,54 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-const Controls = ({zoomOut, zoomIn}) => {
+const Controls = ({ zoomOut, zoomIn }) => {
     return (
         <View style={styles.controlsView}>
-            <Icon 
-                name="search-minus" 
-                style={styles.icon} 
-                onPress={zoomOut}
-            />
-            <Icon 
-                name="search-plus" 
-                style={styles.icon}
-                onPress={zoomIn}
-            />
+            <View style={styles.buttonView}>
+                <Icon
+                    name="search-minus"
+                    style={styles.icon}
+                    onPress={zoomOut}
+                />
+            </View>
+            <View style={styles.buttonView}>
+                <Icon
+                    name="search-plus"
+                    style={styles.icon}
+                    onPress={zoomIn}
+                />
+
+            </View>
         </View>
     );
 }
 
+const isIos = Platform.OS === 'ios'
+
+
 const styles = StyleSheet.create({
     controlsView: {
         flexDirection: 'row',
-        padding: 4,
-        height: 150,        
+        justifyContent: 'flex-end',
+        padding: isIos? 10 : 10,
+        backgroundColor: '#202020',
+        height: isIos ? 140 :100,
+        minWidth: '100%'
+    },
+    buttonView: {
+        flexDirection: 'row',
+        flex: 1,
+        justifyContent: 'flex-end',
+        backgroundColor: '#202020',
+        maxWidth: 50
     },
     icon: {
-        fontSize: 50
+        color: 'white',
+        backgroundColor: '#202020',
+        borderRadius: 10,
+        fontSize: 30,
+        marginRight: 20
     }
 });
 

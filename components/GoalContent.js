@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import HTML from 'react-native-render-html'
 
 const monthNames = [
@@ -16,6 +16,8 @@ const monthNames = [
     'November',
     'Desember'
 ]
+
+const isIos = Platform.OS === 'ios'
 
 const createHtmlTagStyles = (baseSize) => {
     return {
@@ -61,16 +63,16 @@ const GoalContent = ({fontSize}) => {
 
 const styles = StyleSheet.create({
     goalContentView: {
-        backgroundColor: '#000',
-        paddingTop: 80,
-        marginTop: 60
+        backgroundColor: '#202020',
+        paddingTop: isIos ? 80 : 10,
+        marginTop: isIos ? 80 : 80
     },
     contentScrollView: {
         backgroundColor: '#fcfaf5',
         padding: 20
     },
     headerView: {
-        backgroundColor: '#000'
+        backgroundColor: '#202020'
     },
     titleText: {
         fontSize: 22,
