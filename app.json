@@ -1,0 +1,17 @@
+{
+  "name": "fmcgoal",
+  "displayName": "fmcgoal",
+  "expo": {
+    "name": "fmcgoal",
+    "slug": "fmcgoal",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
