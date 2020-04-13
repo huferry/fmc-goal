@@ -1,24 +1,31 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, View, Text } from 'react-native';
+import { useState } from 'react'
 import GoalContent from './components/GoalContent'
+import Controls from './components/Controls';
 
-const instructions = Platform.select({
-  ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
-  android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`,
-});
+const App = () => {
 
-export default function App() {
+  const [fontSize, setFontSize] = useState(16)
+
+  const zoomIn = () => setFontSize(prev => Math.min(prev + 2, 28))
+  const zoomOut = () => setFontSize(prev => Math.max(prev - 2, 14))
+
   return (
     <View style={styles.container}>
-      <GoalContent />   
+      <GoalContent fontSize={ fontSize }/>   
+      <Controls zoomIn={zoomIn} zoomOut={zoomOut}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
   }
 });
+
+export default App;

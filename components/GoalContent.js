@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import HTML from 'react-native-render-html'
-import { ScrollView } from 'react-native-gesture-handler';
 
 const monthNames = [
     'Januari',
@@ -18,7 +17,25 @@ const monthNames = [
     'Desember'
 ]
 
-const GoalContent = () => {
+const createHtmlTagStyles = (baseSize) => {
+    return {
+        h1: {
+            fontSize: baseSize + 4,
+            paddingTop: 10,
+        },
+        h2: {
+            fontSize: baseSize + 2,
+            paddingTop: 10,
+        },
+        p: {
+            fontSize: baseSize,
+            paddingBottom: 10,
+            textAlign: 'left'
+        }
+    }
+}
+
+const GoalContent = ({fontSize}) => {
 
     const publishDate = () => {
         const d = new Date(example.publish_date)
@@ -26,14 +43,17 @@ const GoalContent = () => {
     }
 
     const content = example.content
+
+    const htmlStyles = createHtmlTagStyles(fontSize)
+
     return (
         <View style={styles.goalContentView}>
             <View style={styles.headerView}>
                 <Text style={styles.titleText}>{example.title}</Text>
                 <Text style={styles.dateText}>{publishDate()}</Text>
             </View>
-            <ScrollView style={ styles.contentScrollView }>
-                <HTML html={content} tagsStyles={ htmlTagStyles }/>
+            <ScrollView style={styles.contentScrollView}>
+                <HTML html={content} key={fontSize} tagsStyles={htmlStyles} />
             </ScrollView>
         </View>
     )
@@ -42,7 +62,8 @@ const GoalContent = () => {
 const styles = StyleSheet.create({
     goalContentView: {
         backgroundColor: '#000',
-        paddingTop: 48,
+        paddingTop: 80,
+        marginTop: 60
     },
     contentScrollView: {
         backgroundColor: '#fcfaf5',
@@ -68,24 +89,8 @@ const styles = StyleSheet.create({
     }
 });
 
-
 export default GoalContent
 
-const htmlTagStyles = {
-    h1: {
-        fontSize: 20,
-        paddingTop: 10,
-    },
-    h2: {
-        fontSize: 18,
-        paddingTop: 10,
-    },
-    p: {
-        fontSize: 16,
-        paddingBottom: 10,
-        textAlign: 'left'
-    }
-}
 const example = {
     publish_date: '2020-04-12T00:00:00.000Z',
     culture: 'id-id',
