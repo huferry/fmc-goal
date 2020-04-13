@@ -3,36 +3,95 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import HTML from 'react-native-render-html'
 import { ScrollView } from 'react-native-gesture-handler';
 
+const monthNames = [
+    'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
+]
 
 const GoalContent = () => {
+
+    const publishDate = () => {
+        const d = new Date(example.publish_date)
+        return `${d.getDate()} ${monthNames[d.getMonth()]} ${d.getFullYear()}`
+    }
+
     const content = example.content
     return (
-        <View>
-            <Text>{example.title}</Text>
-            <Text>{example.publish_date}</Text>
-            <ScrollView style={{ flex: 1 }}>
-                <HTML html={content} />
+        <View style={styles.goalContentView}>
+            <View style={styles.headerView}>
+                <Text style={styles.titleText}>{example.title}</Text>
+                <Text style={styles.dateText}>{publishDate()}</Text>
+            </View>
+            <ScrollView style={ styles.contentScrollView }>
+                <HTML html={content} tagsStyles={ htmlTagStyles }/>
             </ScrollView>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    content: {
+    goalContentView: {
+        backgroundColor: '#000',
+        paddingTop: 48,
     },
+    contentScrollView: {
+        backgroundColor: '#fcfaf5',
+        padding: 20
+    },
+    headerView: {
+        backgroundColor: '#000'
+    },
+    titleText: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: 'white'
+    },
+    dateText: {
+        color: '#999',
+        fontSize: 14,
+        textAlign: 'center',
+        paddingBottom: 15
+    },
+    contentHtml: {
+        fontSize: 24
+    }
 });
 
 
 export default GoalContent
 
+const htmlTagStyles = {
+    h1: {
+        fontSize: 20,
+        paddingTop: 10,
+    },
+    h2: {
+        fontSize: 18,
+        paddingTop: 10,
+    },
+    p: {
+        fontSize: 16,
+        paddingBottom: 10,
+        textAlign: 'left'
+    }
+}
 const example = {
-    publish_date: '2020-4-12',
+    publish_date: '2020-04-12T00:00:00.000Z',
     culture: 'id-id',
     title: 'The Fulfillment of Wisdom',
     content: `<h1>Pembukaan</h1>
-    <p>Selamat merayakan “PASKAH”, yaitu kebangkitan YESUS KRISTUS 
-    dari antara orang mati. Mari kita membaca kisah Kebangkitan 
-    Yesus Kristus (Markus 16:1-8).</p>
+    <p>Selamat merayakan PASKAH, yaitu kebangkitan Yesus Kristus dari antara orang mati. Mari kita membaca kisah kebangkitan Yesus Kristus (Markus 16:1-8).</p>
     <h1>Isi</h1>
     <p>Kebangkitan Yesus membawa:</p>  
     <h2>1.Pembaharuan hidup (Markus 16:1-6)</h2>
@@ -57,5 +116,5 @@ const example = {
     </p>
     <h1>Penutup</h1>
     <p>Dalam merayakan PASKAH hari ini, marilah kita menerima kebenaran Firman Tuhan ini, sehingga kita bangkit dan keluar dari hidup biasa -biasa saja. 
-    </p>`
+    </p><p>-</p>`
 }
