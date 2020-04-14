@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-const Controls = ({ zoomOut, zoomIn }) => {
+const Controls = ({ zoomOut, zoomIn, changeLanguage }) => {
     return (
         <View style={styles.controlsView}>            
             <View style={styles.buttonGroupLeftView}>
@@ -10,6 +10,7 @@ const Controls = ({ zoomOut, zoomIn }) => {
                     <Icon
                         name="language"
                         style={styles.icon}
+                        onPress={changeLanguage}
                     />
                 </View>
             </View>

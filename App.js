@@ -4,24 +4,40 @@ import { useState } from 'react'
 import GoalContent from './components/GoalContent'
 import Controls from './components/Controls';
 import getData from './components/Data'
+import LanguageModal from './components/LanguageModal'
 
 const App = () => {
 
   const [fontSize, setFontSize] = useState(16)
-
   const [content, setContent] = useState(example)
+  const [languageModalVisible, setLanguageModalVisible] = useState(12==0)
+  const [language, setLanguage] = useState('nl')
 
   const zoomIn = () => setFontSize(prev => Math.min(prev + 2, 28))
   const zoomOut = () => setFontSize(prev => Math.max(prev - 2, 14))
+  const changeLanguage = () => setLanguageModalVisible(true)
 
-  // getData({culture: 'nl'}).then(arr => {
-  //   setContent(() => arr[0])
-  // })
+  getData({culture: language}).then(arr => {
+    setContent(() => arr[0])
+  })
 
   return (
     <View style={styles.container}>
       <GoalContent fontSize={ fontSize } item={content}/>   
-      <Controls zoomIn={zoomIn} zoomOut={zoomOut}/>
+      <Controls 
+        zoomIn={zoomIn} 
+        zoomOut={zoomOut} 
+        changeLanguage={changeLanguage}/>
+
+      <LanguageModal 
+        modalVisible={languageModalVisible}
+        language={language}
+        onLanguageChanged={value => {
+          setLanguage(value)
+          setLanguageModalVisible(false)
+        }}
+        />
+
     </View>
   );
 }
