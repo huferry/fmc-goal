@@ -4,21 +4,30 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 const Controls = ({ zoomOut, zoomIn }) => {
     return (
-        <View style={styles.controlsView}>
-            <View style={styles.buttonView}>
-                <Icon
-                    name="search-minus"
-                    style={styles.icon}
-                    onPress={zoomOut}
-                />
+        <View style={styles.controlsView}>            
+            <View style={styles.buttonGroupLeftView}>
+                <View style={styles.buttonView}>
+                    <Icon
+                        name="language"
+                        style={styles.icon}
+                    />
+                </View>
             </View>
-            <View style={styles.buttonView}>
-                <Icon
-                    name="search-plus"
-                    style={styles.icon}
-                    onPress={zoomIn}
-                />
-
+            <View style={styles.buttonGroupRightView}>
+                <View style={styles.buttonView}>
+                    <Icon
+                        name="search-minus"
+                        style={styles.icon}
+                        onPress={zoomOut}
+                    />
+                </View>
+                <View style={styles.buttonView}>
+                    <Icon
+                        name="search-plus"
+                        style={styles.icon}
+                        onPress={zoomIn}
+                    />
+                </View>
             </View>
         </View>
     );
@@ -42,6 +51,15 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         backgroundColor: '#202020',
         maxWidth: 50
+    },
+    buttonGroupRightView: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        flex: 1
+    },
+    buttonGroupLeftView: {
+        flexDirection: 'row',
+        flex: 1
     },
     icon: {
         color: 'white',

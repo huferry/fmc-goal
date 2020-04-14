@@ -3,17 +3,24 @@ import { StyleSheet, View, Text } from 'react-native';
 import { useState } from 'react'
 import GoalContent from './components/GoalContent'
 import Controls from './components/Controls';
+import getData from './components/Data'
 
 const App = () => {
 
   const [fontSize, setFontSize] = useState(16)
 
+  const [content, setContent] = useState(example)
+
   const zoomIn = () => setFontSize(prev => Math.min(prev + 2, 28))
   const zoomOut = () => setFontSize(prev => Math.max(prev - 2, 14))
 
+  // getData({culture: 'nl'}).then(arr => {
+  //   setContent(() => arr[0])
+  // })
+
   return (
     <View style={styles.container}>
-      <GoalContent fontSize={ fontSize } item={example}/>   
+      <GoalContent fontSize={ fontSize } item={content}/>   
       <Controls zoomIn={zoomIn} zoomOut={zoomOut}/>
     </View>
   );
