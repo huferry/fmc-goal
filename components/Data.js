@@ -7,10 +7,22 @@ class Cache {
     }
 
     async _getData() {
+
+        function parseDate(s) {
+            const matchDate = s.match(/(\d{4})(\d{2})(\d{2})/)
+            if (matchDate) {
+                return new Date(
+                    parseInt(matchDate[1]), 
+                    parseInt(matchDate[2])-1, 
+                    parseInt(matchDate[3]))
+            } 
+            return new Date(2000, 1, 1)
+        }
+
         const response = await axios.get(`http://192.168.1.39:8080/api/goals`) // `https://fmc-goal-api.azurewebsites.net/api/goals`)
         this.lastUpdate = new Date().valueOf()
         return response.data.map(g => {
-            g.publish_date = new Date(g.publishDate)
+            g.publish_date = parseDate(g.publishDate)
             return g
         })
     }
