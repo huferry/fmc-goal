@@ -22,17 +22,23 @@ const isIos = Platform.OS === 'ios'
 const createHtmlTagStyles = (baseSize) => {
     return {
         h1: {
-            fontSize: baseSize + 4,
+            fontSize: baseSize + 3,
+            textTransform: 'uppercase',
             paddingTop: 10,
+            color: '#e37263'
         },
         h2: {
-            fontSize: baseSize + 2,
+            fontSize: baseSize + 1,
+            fontFamily: 'serif',
             paddingTop: 10,
+            color: '#4a4a4a'
         },
         p: {
             fontSize: baseSize,
+            fontFamily: 'serif',
             paddingBottom: 10,
-            textAlign: 'left'
+            textAlign: 'left',
+            color: '#4a4a4a'
         }
     }
 }
@@ -61,16 +67,16 @@ const GoalContent = ({fontSize, item}) => {
 
 const styles = StyleSheet.create({
     goalContentView: {
-        backgroundColor: '#202020',
+        backgroundColor: '#4a4a4a',
         paddingTop: isIos ? 80 : 10,
         marginTop: isIos ? 80 : 80
     },
     contentScrollView: {
-        backgroundColor: '#fcfaf5',
+        backgroundColor: '#edeff7',
         padding: 20
     },
     headerView: {
-        backgroundColor: '#202020'
+        backgroundColor: '#4a4a4a'
     },
     titleText: {
         fontSize: 22,

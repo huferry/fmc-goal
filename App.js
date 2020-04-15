@@ -14,8 +14,18 @@ const App = () => {
   const [languageModalVisible, setLanguageModalVisible] = useState(false)
   const [language, setLanguage] = useState('nl')
 
-  const zoomIn = () => setFontSize(prev => Math.min(prev + 2, 28))
-  const zoomOut = () => setFontSize(prev => Math.max(prev - 2, 14))
+  const zoomIn = async () => {
+    const newFontSize = Math.min(24, fontSize + 2)
+    await Settings.write({fontSize: newFontSize })
+    setFontSize(newFontSize)
+  }  
+
+  const zoomOut = async () => {
+    const newFontSize = Math.max(fontSize - 2, 10)
+    await Settings.write({fontSize: newFontSize})
+    setFontSize(newFontSize)
+  }
+
   const changeLanguage = () => setLanguageModalVisible(true)
 
   getData({culture: language}).then(arr => {
@@ -24,11 +34,12 @@ const App = () => {
 
   Settings.read().then(settings => {
     setLanguage(settings.language)
+    setFontSize(settings.fontSize)
   })
 
   return (
     <View style={styles.container}>
-      <GoalContent fontSize={ fontSize } item={content}/>   
+      <GoalContent fontSize={fontSize} item={content}/>   
       <Controls 
         zoomIn={zoomIn} 
         zoomOut={zoomOut} 

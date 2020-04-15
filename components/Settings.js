@@ -3,18 +3,21 @@ import AsyncStorage from '@react-native-community/async-storage'
 const Settings = {
     write: async (settings) => {
         try{
-            const currentSettings = await this.read()
-            const updatedSettings = Object.assign(currentSettings, settings)
-            await AsyncStorage.setItem('@language', updatedSettings.language || 'id')
+            const language = settings.language || await AsyncStorage.getItem('@language') || 'id'
+            const fontSize = (settings.fontSize && settings.fontSize.toString()) || await AsyncStorage.getItem('@fontSize') || '16'
+            await AsyncStorage.setItem('@language', language)
+            await AsyncStorage.setItem('@fontSize', fontSize)
         } catch(err) {            
         }
     },
 
     read: async () => {
-        const language = (await AsyncStorage.getItem('@language')) || 'id'
+        const language = await AsyncStorage.getItem('@language') || 'id'
+        const fontSize = parseInt(await AsyncStorage.getItem('@fontSize'))
         return {
-            language
-        }
+                language,
+                fontSize
+            }
     }
 
 

@@ -19,7 +19,7 @@ class Cache {
             return new Date(2000, 1, 1)
         }
 
-        const response = await axios.get(`http://192.168.1.39:8080/api/goals`) // `https://fmc-goal-api.azurewebsites.net/api/goals`)
+        const response = await axios.get(`https://fmc-goal-api.azurewebsites.net/api/goals`)
         this.lastUpdate = new Date().valueOf()
         return response.data.map(g => {
             g.publish_date = parseDate(g.publishDate)
