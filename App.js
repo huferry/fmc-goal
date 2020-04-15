@@ -10,7 +10,7 @@ const App = () => {
 
   const [fontSize, setFontSize] = useState(16)
   const [content, setContent] = useState(example)
-  const [languageModalVisible, setLanguageModalVisible] = useState(12==0)
+  const [languageModalVisible, setLanguageModalVisible] = useState(1==110)
   const [language, setLanguage] = useState('nl')
 
   const zoomIn = () => setFontSize(prev => Math.min(prev + 2, 28))
