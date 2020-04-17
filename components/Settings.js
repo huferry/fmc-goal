@@ -1,26 +1,27 @@
-import AsyncStorage from '@react-native-community/async-storage'
+let localSettings = {}
 
 const Settings = {
     write: async (settings) => {
         try{
-            const language = settings.language || await AsyncStorage.getItem('@language') || 'id'
-            const fontSize = (settings.fontSize && settings.fontSize.toString()) || await AsyncStorage.getItem('@fontSize') || '16'
-            await AsyncStorage.setItem('@language', language)
-            await AsyncStorage.setItem('@fontSize', fontSize)
+            const language = settings.language || 'id'
+            const fontSize = settings.localSettings || 16
+            
+            localSettings = {
+                language,
+                fontSize
+            }
         } catch(err) {            
         }
     },
 
     read: async () => {
-        const language = await AsyncStorage.getItem('@language') || 'id'
-        const fontSize = parseInt(await AsyncStorage.getItem('@fontSize'))
+        const language = localSettings.language || 'id'
+        const fontSize = localSettings.fontSize || 16
         return {
                 language,
                 fontSize
             }
     }
-
-
 }
 
 export default Settings
