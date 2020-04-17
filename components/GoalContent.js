@@ -29,13 +29,11 @@ const createHtmlTagStyles = (baseSize) => {
         },
         h2: {
             fontSize: baseSize + 1,
-            fontFamily: 'serif',
             paddingTop: 10,
             color: '#4a4a4a'
         },
         p: {
             fontSize: baseSize,
-            fontFamily: 'serif',
             paddingBottom: 10,
             textAlign: 'left',
             color: '#4a4a4a'
@@ -59,7 +57,7 @@ const GoalContent = ({fontSize, item}) => {
                 <Text style={styles.dateText}>{publishDate()}</Text>
             </View>
             <ScrollView style={styles.contentScrollView}>
-                <HTML html={item.content} key={fontSize} tagsStyles={htmlStyles} />
+                <HTML html={item.content + '<p></p>'} key={fontSize} tagsStyles={htmlStyles} />
             </ScrollView>
         </View>
     )
@@ -68,12 +66,12 @@ const GoalContent = ({fontSize, item}) => {
 const styles = StyleSheet.create({
     goalContentView: {
         backgroundColor: '#4a4a4a',
-        paddingTop: isIos ? 80 : 10,
-        marginTop: isIos ? 80 : 80
+        paddingTop: isIos ? 120 : 10,
+        marginTop: isIos ? 0 : 80
     },
     contentScrollView: {
         backgroundColor: '#edeff7',
-        padding: 20
+        padding: 20,
     },
     headerView: {
         backgroundColor: '#4a4a4a'
